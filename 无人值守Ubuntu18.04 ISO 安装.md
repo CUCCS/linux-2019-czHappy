@@ -77,7 +77,7 @@
      `umount loopdir`
  
  6. 进入工作目录编辑Ubuntu安装引导界面增加一个新菜单项入口,添加以下内容
-    `sudo vi isolinux/txt.cfg`
+    ```sudo vi isolinux/txt.cfg```
     ```
          label autoinstall   menu label ^Auto Install Ubuntu Server    
          kernel /install/vmlinuz   
@@ -94,38 +94,41 @@
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/adit-txt-cfg.PNG)
   <br>
  7. 下载 ubuntu-server-autoinstall.seed  至  home/cz/cd/preseed
-
-     `put ubuntu-server-autoinstall.seed`
-    `sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/`
+    ```put ubuntu-server-autoinstall.seed
+    sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/```
 
  8. 修改isolinux/isolinux.cfg,修改内容 timeout 10
->  <br>
+
+ <br>
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/edit-timeout.PNG)
->  <br>
+ <br>
  9. 制作镜像
      - 重新生成md5sum.txt,注意赋予相应的权限
-     `chmod 777 md5sum.txt`
-     ` cd ~/cd && find . -type f -print0 | xargs -0 md5sum > md5sum.txt `
+     ```chmod 777 md5sum.txt
+      cd ~/cd && find . -type f -print0 | xargs -0 md5sum > md5sum.txt ```
      - 配置镜像名和目标路径
-      `IMAGE=custom.iso`
-     `BUILD=/home/cz/cd/`
+      ```IMAGE=custom.iso
+     BUILD=/home/cz/cd/```
      - 执行制作镜像命令,需要先安装mkisoimage
-      ` mkisofs -r -V "Custom Ubuntu Install CD" \
-            -cache-inodes \
-            -J -l -b isolinux/isolinux.bin \
-            -c isolinux/boot.cat -no-emul-boot \
-            -boot-load-size 4 -boot-info-table \
-            -o $IMAGE $BUILD
-    `  
-        
+ 
+ ```
+ mkisofs -r -V "Custom Ubuntu Install CD" \
+             -cache-inodes \
+             -J -l -b isolinux/isolinux.bin \
+             -c isolinux/boot.cat -no-emul-boot \
+             -boot-load-size 4 -boot-info-table \
+             -o $IMAGE $BUILD
+```
      - 出现无法定位软件包时按如下命令解决
-       `sudo apt-get update`</br>
+       ```sudo apt-get update```
+       
         ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-gen-fail.PNG)
-
+        
      - 最后把制作完成的custom.iso传送至宿主机
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`get custom.iso`
- <br>
-&nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-iso.PNG)
+     
+     ```get custom.iso```
+
+    ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-iso.PNG)
 <br>
 
 
@@ -139,36 +142,46 @@
 &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/login.PNG)
 <br>
 
+---
 ## 六、 定制好的seed文件与官方实例文件对比
 
  - 使用在线[文本对比工具][1]对比文本内容
  - 安装语言 国家 编码方式
 &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/1.PNG)
-<br>
+<br>   
+
  - 缩短网络连接（包括网络连接和dhcp服务器连接）超时时间和手动配置网络
  &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/2.PNG)
 <br>
+
  - 添加静态网络配置
  &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/3.PNG)
 <br>
+
  - 设置主机和域名
  &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/4.PNG)
 <br>
+
  - 设置用户名和密码,记住它方便在安装完成登录时使用
  &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/6.PNG)
 <br>
+
  - 设置时区 亚洲上海
  &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/7.PNG)
 <br>
+
  - 选择最大空闲分区
  &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/11.PNG)
 <br>
+
  - 设置逻辑卷管理分区，逻辑卷大小设置为最大，独立/home、/var和/tmp分区
  &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/8.PNG)
 <br>
+
  - apt安装，设置不适用镜像
 &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/9.PNG)
 <br>
+
  - 安装可选软件包，安装openssh,卸载引导程序后不自动更新。并且设置更新策略为：禁止自动更新
  &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/10.PNG)
 
