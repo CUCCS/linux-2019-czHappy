@@ -94,22 +94,22 @@
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/adit-txt-cfg.PNG)
   <br>
  7. 下载 ubuntu-server-autoinstall.seed  至  home/cz/cd/preseed
-    ```put ubuntu-server-autoinstall.seed
+
+     ```put ubuntu-server-autoinstall.seed
     sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/```
 
  8. 修改isolinux/isolinux.cfg,修改内容 timeout 10
 
- <br>
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/edit-timeout.PNG)
- <br>
+ 
  9. 制作镜像
-     - 重新生成md5sum.txt,注意赋予相应的权限
+- 重新生成md5sum.txt,注意赋予相应的权限
      ```chmod 777 md5sum.txt
       cd ~/cd && find . -type f -print0 | xargs -0 md5sum > md5sum.txt ```
-     - 配置镜像名和目标路径
+- 配置镜像名和目标路径
       ```IMAGE=custom.iso
      BUILD=/home/cz/cd/```
-     - 执行制作镜像命令,需要先安装mkisoimage
+- 执行制作镜像命令,需要先安装mkisoimage
  
  ```
  mkisofs -r -V "Custom Ubuntu Install CD" \
@@ -119,17 +119,16 @@
              -boot-load-size 4 -boot-info-table \
              -o $IMAGE $BUILD
 ```
-     - 出现无法定位软件包时按如下命令解决
+- 出现无法定位软件包时按如下命令解决
        ```sudo apt-get update```
        
         ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-gen-fail.PNG)
         
-     - 最后把制作完成的custom.iso传送至宿主机
+- 最后把制作完成的custom.iso传送至宿主机
      
      ```get custom.iso```
 
     ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-iso.PNG)
-<br>
 
 
 ---
