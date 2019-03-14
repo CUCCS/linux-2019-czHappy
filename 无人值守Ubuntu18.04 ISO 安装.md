@@ -120,9 +120,10 @@
              -o $IMAGE $BUILD
 ```
 - 出现无法定位软件包时按如下命令解决
-       ```sudo apt-get update```
-       
-        ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-gen-fail.PNG)
+
+    `sudo apt-get update`
+
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-gen-fail.PNG)
         
 - 最后把制作完成的custom.iso传送至宿主机
      
