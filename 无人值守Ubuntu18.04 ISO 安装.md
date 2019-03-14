@@ -47,37 +47,34 @@
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/log-psftp.PNG)
 >  <br>
 > 3. 传输镜像文件时，首先把镜像文件放在和psftp同一目录下方便传输（或者传输时指定绝对路径），进入虚拟机当前用户目录下，使用put命令
-     `put ubuntu-18.04.1-server-amd64.iso`
->  <br>
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/put-iso.PNG)
->  <br>
+`put ubuntu-18.04.1-server-amd64.iso`
+<br> 
+ ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/put-iso.PNG)
+
  
 
 ## 四、无人值守Ubuntu18.04 ISO 制作
 
 
  1.  在当前用户目录下创建一个用于挂载iso镜像文件的目录
- 
-     `mkdir loopdir`
+ `mkdir loopdir`
  
  2. 挂载iso镜像文件到该目录
- 
  `sudo mount -o loop ubuntu-18.04.1-server-amd64.iso loopdir`
 
  3. 创建一个工作目录用于克隆光盘内容
- 
  `mkdir cd`
  
  4. 同步光盘内容到目标工作目录
- 
  `sudo rsync -av loopdir/ cd`
 
  5. 卸载iso镜像
- 
-     `umount loopdir`
+ `umount loopdir`
  
  6. 进入工作目录编辑Ubuntu安装引导界面增加一个新菜单项入口,添加以下内容
-    ```sudo vi isolinux/txt.cfg```
+
+    `sudo vi isolinux/txt.cfg`
+     
     ```
          label autoinstall   menu label ^Auto Install Ubuntu Server    
          kernel /install/vmlinuz   
@@ -90,14 +87,14 @@
          initrd=/install/initrd.gz root=/dev/ram    
          rw quiet
     ```
-      <br>
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/adit-txt-cfg.PNG)
-  <br>
+     
+ ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/adit-txt-cfg.PNG)
+  
  7. 下载 ubuntu-server-autoinstall.seed  至  home/cz/cd/preseed
 
-`put ubuntu-server-autoinstall.seed
-sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/
-`
+`put ubuntu-server-autoinstall.seed`
+`sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/ `
+
 
  8. 修改isolinux/isolinux.cfg,修改内容 timeout 10
 
@@ -121,14 +118,12 @@ sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/
              -o $IMAGE $BUILD
 ```
 - 出现无法定位软件包时按如下命令解决
-
-    `sudo apt-get update`
+`sudo apt-get update`
 
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-gen-fail.PNG)
         
 - 最后把制作完成的custom.iso传送至宿主机
-     
-     ```get custom.iso```
+     `get custom.iso`
 
     ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-iso.PNG)
 
