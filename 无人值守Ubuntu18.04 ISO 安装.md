@@ -39,16 +39,17 @@
 ## 三、使用PSFTP在虚拟机和宿主机之间传输文件
 
 > 1. 首先连接putty，确保虚拟机已经安装ssh服务 
->  <br>
+
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/login-putty.PNG)
->  <br>
+
 > 2. 打开psftp, open 192.168.56.102，即打开已经连接的主机
->  <br>
+
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/log-psftp.PNG)
->  <br>
+
 > 3. 传输镜像文件时，首先把镜像文件放在和psftp同一目录下方便传输（或者传输时指定绝对路径），进入虚拟机当前用户目录下，使用put命令
+
 `put ubuntu-18.04.1-server-amd64.iso`
-<br> 
+
  ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/put-iso.PNG)
 
  
@@ -57,19 +58,24 @@
 
 
  1.  在当前用户目录下创建一个用于挂载iso镜像文件的目录
- `mkdir loopdir`
+
+  `mkdir loopdir`
  
  2. 挂载iso镜像文件到该目录
- `sudo mount -o loop ubuntu-18.04.1-server-amd64.iso loopdir`
+
+  `sudo mount -o loop ubuntu-18.04.1-server-amd64.iso loopdir`
 
  3. 创建一个工作目录用于克隆光盘内容
- `mkdir cd`
+
+  `mkdir cd`
  
  4. 同步光盘内容到目标工作目录
- `sudo rsync -av loopdir/ cd`
+
+  `sudo rsync -av loopdir/ cd`
 
  5. 卸载iso镜像
- `umount loopdir`
+
+  `umount loopdir`
  
  6. 进入工作目录编辑Ubuntu安装引导界面增加一个新菜单项入口,添加以下内容
 
@@ -93,6 +99,7 @@
  7. 下载 ubuntu-server-autoinstall.seed  至  home/cz/cd/preseed
 
 `put ubuntu-server-autoinstall.seed`
+
 `sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/ `
 
 
@@ -102,11 +109,15 @@
  
  9. 制作镜像
 - 重新生成md5sum.txt,注意赋予相应的权限
-     ```chmod 777 md5sum.txt
-      cd ~/cd && find . -type f -print0 | xargs -0 md5sum > md5sum.txt ```
+```
+chmod 777 md5sum.txt
+cd ~/cd && find . -type f -print0 | xargs -0 md5sum > md5sum.txt
+```
 - 配置镜像名和目标路径
-      ```IMAGE=custom.iso
-     BUILD=/home/cz/cd/```
+```
+IMAGE=custom.iso
+BUILD=/home/cz/cd/
+```
 - 执行制作镜像命令,需要先安装mkisoimage
  
  ```
@@ -118,11 +129,13 @@
              -o $IMAGE $BUILD
 ```
 - 出现无法定位软件包时按如下命令解决
+
 `sudo apt-get update`
 
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-gen-fail.PNG)
         
 - 最后把制作完成的custom.iso传送至宿主机
+
      `get custom.iso`
 
     ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-iso.PNG)
