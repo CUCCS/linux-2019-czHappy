@@ -66,11 +66,11 @@
 
  3. 创建一个工作目录用于克隆光盘内容
  
-     `mkdir cd`
+ `mkdir cd`
  
  4. 同步光盘内容到目标工作目录
  
-     `sudo rsync -av loopdir/ cd`
+ `sudo rsync -av loopdir/ cd`
 
  5. 卸载iso镜像
  
@@ -95,8 +95,9 @@
   <br>
  7. 下载 ubuntu-server-autoinstall.seed  至  home/cz/cd/preseed
 
-     ```put ubuntu-server-autoinstall.seed
-    sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/```
+`put ubuntu-server-autoinstall.seed
+sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/
+`
 
  8. 修改isolinux/isolinux.cfg,修改内容 timeout 10
 
@@ -138,9 +139,10 @@
 
  - 新建虚拟机，把制作好的镜像custome.iso添加进光盘，然后启动就OK了
  - 安装完成后需要输入用户名密码，可以查看ubuntu-server-autoinstall.seed文件
- <br>
+ 
+
 &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/login.PNG)
-<br>
+
 
 ---
 ## 六、 定制好的seed文件与官方实例文件对比
