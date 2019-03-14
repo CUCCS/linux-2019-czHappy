@@ -110,26 +110,25 @@
       `IMAGE=custom.iso`
      `BUILD=/home/cz/cd/`
      - 执行制作镜像命令,需要先安装mkisoimage
-      ``` mkisofs -r -V "Custom Ubuntu Install CD" \
+      ` mkisofs -r -V "Custom Ubuntu Install CD" \
             -cache-inodes \
             -J -l -b isolinux/isolinux.bin \
             -c isolinux/boot.cat -no-emul-boot \
             -boot-load-size 4 -boot-info-table \
             -o $IMAGE $BUILD
-        ```   
+    `  
+        
      - 出现无法定位软件包时按如下命令解决
        `sudo apt-get update`</br>
         ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-gen-fail.PNG)
 
-<br>
-  &nbsp;    10.  最后把制作完成的custom.iso传送至宿主机
+     - 最后把制作完成的custom.iso传送至宿主机
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`get custom.iso`
  <br>
 &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-iso.PNG)
 <br>
 
 
-```
 ---
 
 ## 五、 自动安装过程
@@ -177,8 +176,9 @@
 1. 经常出现permission deny,则需要使用sudo提升权限
 2. 下载安装mkisoimage软件包出现不能定位软件包错误，后来使用
 `sudo apt-get update `
-3. 把l（L）看成I（i），低级错误。对于这样的代码要么复制粘贴，要自己手敲就要看仔细。
+3. 把l（L）看成I(i)，低级错误。对于这样的代码要么复制粘贴，要自己手敲就要看仔细。
 4. 踩坑，修改txt.cfg配置文件时没有把autoinstall标签内容置顶，导致镜像安装时不能自动安装，在此之前没有看到老师的教程，后来查到了按照老师的教程做了一遍。
+5. markdown格式问题，在在线编辑器中没有问题，上传至github预览格式乱了，原因是前后标记不对应。
 
 ## 参考资料
 
