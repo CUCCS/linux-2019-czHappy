@@ -12,41 +12,42 @@
 
 
 ## 二、添加网卡并设置自动启动和自动获取IP
-> 1. 首先手动安装Ubuntu18.04.1-server-amd64.iso镜像   
->  <br>
-> 2. 在虚拟机为该系统配置第二块网卡 host-only，开机时自动启动 
->  <br>
+-  首先手动安装Ubuntu18.04.1-server-amd64.iso镜像   
+  <br>
+-  在虚拟机为该系统配置第二块网卡 host-only，开机时自动启动 
+  <br>
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/add-adapter.PNG)
->  <br>
-> 3. 启动虚拟机，查看配置ifconfig -a,可以看到第二块网卡enp0s8未分配IP
->  <br>
+  <br>
+- 启动虚拟机，查看配置ifconfig -a,可以看到第二块网卡enp0s8未分配IP
+  <br>
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/ifconfig.PNG)
->  <br>
->   方法(1): 手动启动，下次开机时若需要启动则需要再次输入命令
->  <br>
+  <br>
+   方法(1): 手动启动，下次开机时若需要启动则需要再次输入命令
+  <br>
 `sudo dhclient enp0s8` 
->  <br>
->   方法(2): 修改配置文件  开机自动获取IP   
+  <br>
+   方法(2): 修改配置文件  开机自动获取IP   
    <br>` sudo vi /etc/netplan/01-netcfg.yaml`<br> 
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/aotu-start.PNG)
-> <br>启动之后查看网卡ip  
-  >  <br>
+ <br>
+- 启动之后查看网卡ip  
+    <br>
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/adapter-active.PNG)
->  <br>
+  <br>
 
 ------
 
 ## 三、使用PSFTP在虚拟机和宿主机之间传输文件
 
-> 1. 首先连接putty，确保虚拟机已经安装ssh服务 
+- 首先连接putty，确保虚拟机已经安装ssh服务 
 
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/login-putty.PNG)
 
-> 2. 打开psftp, open 192.168.56.102，即打开已经连接的主机
+- 打开psftp, open 192.168.56.102，即打开已经连接的主机
 
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/log-psftp.PNG)
 
-> 3. 传输镜像文件时，首先把镜像文件放在和psftp同一目录下方便传输（或者传输时指定绝对路径），进入虚拟机当前用户目录下，使用put命令
+- 传输镜像文件时，首先把镜像文件放在和psftp同一目录下方便传输（或者传输时指定绝对路径），进入虚拟机当前用户目录下，使用put命令
 
 `put ubuntu-18.04.1-server-amd64.iso`
 
@@ -57,27 +58,27 @@
 ## 四、无人值守Ubuntu18.04 ISO 制作
 
 
- 1.  在当前用户目录下创建一个用于挂载iso镜像文件的目录
+- 在当前用户目录下创建一个用于挂载iso镜像文件的目录
 
   `mkdir loopdir`
  
- 2. 挂载iso镜像文件到该目录
+- 挂载iso镜像文件到该目录
 
   `sudo mount -o loop ubuntu-18.04.1-server-amd64.iso loopdir`
 
- 3. 创建一个工作目录用于克隆光盘内容
+- 创建一个工作目录用于克隆光盘内容
 
   `mkdir cd`
  
- 4. 同步光盘内容到目标工作目录
+- 同步光盘内容到目标工作目录
 
   `sudo rsync -av loopdir/ cd`
 
- 5. 卸载iso镜像
+- 卸载iso镜像
 
   `umount loopdir`
  
- 6. 进入工作目录编辑Ubuntu安装引导界面增加一个新菜单项入口,添加以下内容
+- 进入工作目录编辑Ubuntu安装引导界面增加一个新菜单项入口,添加以下内容
 
     `sudo vi isolinux/txt.cfg`
      
@@ -96,18 +97,18 @@
      
  ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/adit-txt-cfg.PNG)
   
- 7. 下载 ubuntu-server-autoinstall.seed  至  home/cz/cd/preseed
+- 下载 ubuntu-server-autoinstall.seed  至  home/cz/cd/preseed
 
 `put ubuntu-server-autoinstall.seed`
 
 `sudo mv ubuntu-server-autoinstall.seed /home/cz/cd/preseed/ `
 
 
- 8. 修改isolinux/isolinux.cfg,修改内容 timeout 10
+- 修改isolinux/isolinux.cfg,修改内容 timeout 10
 
 ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/edit-timeout.PNG)
  
- 9. 制作镜像
+- 制作镜像
 - 重新生成md5sum.txt,注意赋予相应的权限
 ```
 chmod 777 md5sum.txt
@@ -201,7 +202,7 @@ BUILD=/home/cz/cd/
 `sudo apt-get update `
 3. 把l（L）看成I(i)，低级错误。对于这样的代码要么复制粘贴，要自己手敲就要看仔细。
 4. 踩坑，修改txt.cfg配置文件时没有把autoinstall标签内容置顶，导致镜像安装时不能自动安装，在此之前没有看到老师的教程，后来查到了按照老师的教程做了一遍。
-5. markdown格式问题，在在线编辑器中没有问题，上传至github预览格式乱了，原因是前后标记不对应。
+5. markdown格式问题，在在线编辑器中没有问题，上传至github预览格式乱了，原因是前后标记不对应。并且使用了过多不恰当的引用符号，以后多阅读其他排版很好的同学文档，学习学习。
 
 ## 参考资料
 
