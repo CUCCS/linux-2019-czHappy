@@ -16,11 +16,11 @@
 >  <br>
 > 2. 在虚拟机为该系统配置第二块网卡 host-only，开机时自动启动 
 >  <br>
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/add-adapter.PNG)
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/add-adapter.PNG)
 >  <br>
 > 3. 启动虚拟机，查看配置ifconfig -a,可以看到第二块网卡enp0s8未分配IP
 >  <br>
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/ifconfig.PNG)
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/ifconfig.PNG)
 >  <br>
 >   方法(1): 手动启动，下次开机时若需要启动则需要再次输入命令
 >  <br>
@@ -28,10 +28,10 @@
 >  <br>
 >   方法(2): 修改配置文件  开机自动获取IP   
    <br>` sudo vi /etc/netplan/01-netcfg.yaml`<br> 
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/aotu-start.PNG)
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/aotu-start.PNG)
 > <br>启动之后查看网卡ip  
   >  <br>
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/adapter-active.PNG)
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/adapter-active.PNG)
 >  <br>
 
 ------
@@ -40,17 +40,17 @@
 
 > 1. 首先连接putty，确保虚拟机已经安装ssh服务 
 
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/login-putty.PNG)
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/login-putty.PNG)
 
 > 2. 打开psftp, open 192.168.56.102，即打开已经连接的主机
 
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/log-psftp.PNG)
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/log-psftp.PNG)
 
 > 3. 传输镜像文件时，首先把镜像文件放在和psftp同一目录下方便传输（或者传输时指定绝对路径），进入虚拟机当前用户目录下，使用put命令
 
 `put ubuntu-18.04.1-server-amd64.iso`
 
- ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/put-iso.PNG)
+ ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/put-iso.PNG)
 
  
 
@@ -94,7 +94,7 @@
          rw quiet
     ```
      
- ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/adit-txt-cfg.PNG)
+ ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/adit-txt-cfg.PNG)
   
  7. 下载 ubuntu-server-autoinstall.seed  至  home/cz/cd/preseed
 
@@ -105,7 +105,7 @@
 
  8. 修改isolinux/isolinux.cfg,修改内容 timeout 10
 
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/edit-timeout.PNG)
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/edit-timeout.PNG)
  
  9. 制作镜像
 - 重新生成md5sum.txt,注意赋予相应的权限
@@ -132,13 +132,13 @@ BUILD=/home/cz/cd/
 
 `sudo apt-get update`
 
-![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-gen-fail.PNG)
+![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/get-gen-fail.PNG)
         
 - 最后把制作完成的custom.iso传送至宿主机
 
      `get custom.iso`
 
-    ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/get-iso.PNG)
+    ![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/get-iso.PNG)
 
 
 ---
@@ -147,9 +147,9 @@ BUILD=/home/cz/cd/
 
  - 新建虚拟机，把制作好的镜像custome.iso添加进光盘，然后启动就OK了
  - 安装完成后需要输入用户名密码，可以查看ubuntu-server-autoinstall.seed文件
- 
+ - **[自动安装过程录屏链接][1]**
 
-&nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/image/login.PNG)
+&nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/image/login.PNG)
 
 
 ---
@@ -157,43 +157,43 @@ BUILD=/home/cz/cd/
 
  - 使用在线[文本对比工具][1]对比文本内容
  - 安装语言 国家 编码方式
-&nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/1.PNG)
+&nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/1.PNG)
 <br>   
 
  - 缩短网络连接（包括网络连接和dhcp服务器连接）超时时间和手动配置网络
- &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/2.PNG)
+ &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/2.PNG)
 <br>
 
  - 添加静态网络配置
- &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/3.PNG)
+ &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/3.PNG)
 <br>
 
  - 设置主机和域名
- &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/4.PNG)
+ &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/4.PNG)
 <br>
 
  - 设置用户名和密码,记住它方便在安装完成登录时使用
- &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/6.PNG)
+ &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/6.PNG)
 <br>
 
  - 设置时区 亚洲上海
- &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/7.PNG)
+ &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/7.PNG)
 <br>
 
  - 选择最大空闲分区
- &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/11.PNG)
+ &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/11.PNG)
 <br>
 
  - 设置逻辑卷管理分区，逻辑卷大小设置为最大，独立/home、/var和/tmp分区
- &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/8.PNG)
+ &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/8.PNG)
 <br>
 
  - apt安装，设置不适用镜像
-&nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/9.PNG)
+&nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/9.PNG)
 <br>
 
  - 安装可选软件包，安装openssh,卸载引导程序后不自动更新。并且设置更新策略为：禁止自动更新
- &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/image/text_contrast/10.PNG)
+ &nbsp;&nbsp;&nbsp;&nbsp;![图片](https://github.com/CUCCS/linux-2019-czHappy/raw/exp01/exp01/image/text_contrast/10.PNG)
 
 ## 七、实验中遇到的问题以及解决
 1. 经常出现permission deny,则需要使用sudo提升权限
@@ -208,3 +208,6 @@ BUILD=/home/cz/cd/
  - http://sec.cuc.edu.cn/huangwei/course/LinuxSysAdmin/chap0x01.exp.md.html#/title-slide
  - https://www.cnblogs.com/everyday0error/p/5316363.html vim使用方法 
  - https://help.ubuntu.com/lts/installation-guide/example-preseed.txt
+
+
+  [1]: https://www.bilibili.com/video/av46323591/
