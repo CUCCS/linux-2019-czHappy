@@ -155,7 +155,8 @@ sudo chmod +x /etc/rc.local
 
 #reboot之后自动挂载正常
 ```
- 
+![](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/share.PNG?raw=true)
+
  ## 实验感悟
  - 本次实验印象最深的是service，通过service可以控制许多脚本命令的执行，也可以管理开机自启动项。在service的配置文件中我们可以通过对各个字段进行设置，达到许多预期的功能。
 
