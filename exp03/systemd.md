@@ -59,7 +59,6 @@ mount: wrong fs type, bad option, bad superblock on /mnt/share,
 ```
 ![error](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/error.PNG?raw=true)
 
-![solution](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/share.PNG?raw=true)
 - 基于LVM（逻辑分卷管理）的分区如何实现动态扩容和缩减容量？
 ```bash
 lvdisplay #查看lvm信息，找到对应的分区
