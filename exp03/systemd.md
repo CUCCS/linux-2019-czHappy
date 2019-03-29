@@ -77,7 +77,7 @@ lvresize #命令可增可减，参数相同
 ![error](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/缩容.PNG?raw=true)
 - 如何通过systemd设置实现在网络连通时运行一个指定脚本，在网络断开时运行另一个脚本？
 ```bash
-#在与网络连通相关的service中（networking.service）设置两个字段
+#在与网络连通相关的配置文件/lib/systemd/system/systemd-networkd.service设置两个字段
 
 #不妨设这两个脚本为echo “something”
 
