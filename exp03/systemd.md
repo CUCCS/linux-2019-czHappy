@@ -78,6 +78,7 @@ lvresize #命令可增可减，参数相同
 - 如何通过systemd设置实现在网络连通时运行一个指定脚本，在网络断开时运行另一个脚本？
 ```bash
 #在与网络连通相关的配置文件/lib/systemd/system/systemd-networkd.service设置两个字段
+#此处参考卢玉洁同学的文档，之前一直在改networking.service配置文件，发现不行，原来是上面那个配置文件
 
 #不妨设这两个脚本为echo “something”
 
@@ -94,8 +95,9 @@ ExecStopPost=/bin/echo post2
 #自定义一个服务，开机自启动，ExecStart字段设置为启动该脚本
 #编写另外一个脚本文件x，该脚本用于启动该服务
 #把这个自定义服务的ExecStop字段设置为启动脚本x
+#现在想想不行，因为启动服务需要sudo权限，会要求输入密码......除非是root用户
 
-#还有一种简单的方法是将该自定义service的[Service]区的Restart字段设置为always 
+#一种简单的方法是将该自定义service的[Service]区的Restart字段设置为always 
 Restart=always #失败,一stop真stop了..
 ```
 ![](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/fail.PNG?raw=true)
@@ -166,3 +168,4 @@ sudo chmod +x /etc/rc.local
 - [Systemd 入门教程：实战篇](http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html)
 - [LVM wiki](https://wiki.debian.org/LVM)
 - [建立自定义service](https://wiki.debian.org/systemd/Services?highlight=%28systemctl%29%7C%28service%29)
+- [luyj](https://github.com/CUCCS/linux-2019-luyj/blob/Linux_exp0x03/Linux_exp0x03/Systemd%E5%85%A5%E9%97%A8.md)
