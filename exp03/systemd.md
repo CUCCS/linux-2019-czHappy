@@ -44,34 +44,42 @@ sudo fdisk -l #查看当前系统分区表
 - 如何实现开机自动挂载Virtualbox的共享目录分区？
  ```bash
 #用VirtualBox虚拟机的共享文件夹设置共享的本地文件E:\vbshare
+
 #在ubuntu中创建一个共享目录
 mkdir /mnt/share
+
 #root下执行挂载命令
- mount -t vboxsf vbshare /mnt/share
+mount -t vboxsf vbshare /mnt/share
+ 
 #结果错误
-mount: wrong fs type, bad option, bad superblock on /mnt/share,
- missing codepage or helper program, or other error
- #原因是缺少挂载nfs格式的文件
- apt-get install nfs-common
- #重新挂载 
- 无效，没有解决该问题
+mount: wrong fs type, bad option, bad superblock on /mnt/share, missing codepage or helper program, or other error
+
+#原因是缺少挂载nfs格式的文件
+apt-get install nfs-common
+
+#重新挂载 
+无效，没有解决该问题
 
 ```
 ![error](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/error.PNG?raw=true)
 
-![solution](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/share.PNG?raw=true)
 - 基于LVM（逻辑分卷管理）的分区如何实现动态扩容和缩减容量？
 ```bash
 lvdisplay #查看lvm信息，找到对应的分区
+
 lvreduce --size -1G  /dev/cuc-vg/root#缩减容量
+
 lvextend --size +1G  /dev/cuc-vg/root#扩容
+
 lvresize #命令可增可减，参数相同
 ```
 ![error](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/缩容.PNG?raw=true)
 - 如何通过systemd设置实现在网络连通时运行一个指定脚本，在网络断开时运行另一个脚本？
 ```bash
 #在与网络连通相关的service中（networking.service）设置两个字段
+
 #不妨设这两个脚本为echo “something”
+
 [Service]
 ExecStartPost=/bin/echo post1
 ExecStopPost=/bin/echo post2 
@@ -95,10 +103,13 @@ ExecStopPost=/bin/echo post2
  
 #问题解决 安装virtbox工具集
   sudo apt-get install virtualbox-guest-utils
+  
 #挂载测试 ，不再报错，可以看到share.txt文件
  mount -t vboxsf vbshare /mnt/share
+ 
  #实现上一步后，/etc/rc.local 中追加如下命令实现开机自启动
  mount -t vboxsf vbshare /mnt/share
+ 
  #reboot后查看共享文件夹，发现不能自动挂载
  ```
  - rc.local
@@ -126,7 +137,7 @@ SysVStartPriority=99
 WantedBy=multi-user.target
 
 #根据命令篇教程，systemctl enable命令相当于激活开机启动，将该服务开机自启
-sudo systemctl status rc-local.service#f返回结果是建立了链接
+sudo systemctl enable rc-local.service#f返回结果是建立了链接
 
 #在之前的rc.local里面编写挂载共享文件的命令
 !/bin/sh -e
