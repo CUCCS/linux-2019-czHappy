@@ -137,9 +137,7 @@ ConditionPathExists=/etc/rc.local
 Type=forking
 ExecStart=/etc/rc.local start   #为了启动这个脚本
 TimeoutSec=0
-StandardOutput=tty
 RemainAfterExit=yes
-SysVStartPriority=99
  
 [Install]
 WantedBy=multi-user.target
