@@ -1,4 +1,5 @@
-﻿
+
+
 # Sytemd入门教程实验
 
 ## 实验内容
@@ -52,7 +53,7 @@ mkdir /mnt/share
 mount -t vboxsf vbshare /mnt/share
  
 #结果错误
-mount: wrong fs type, bad option, bad superblock on /mnt/share, missing codepage or helper program, or other error
+mount: wrong fs type, bad option, bad superblock on /mnt/share, missing codepage or helper program, or other error
 
 #原因是缺少挂载nfs格式的文件
 apt-get install nfs-common
@@ -83,8 +84,11 @@ lvresize #命令可增可减，参数相同
 [Service]
 ExecStartPost=/bin/echo post1
 ExecStopPost=/bin/echo post2 
-
 ```
+![](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/Exec.PNG?raw=true)
+
+![](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/echo.PNG?raw=true)
+
 - 如何通过systemd设置实现一个脚本在任何情况下被杀死之后会立即重新启动？实现**杀不死**？
 ```bash
 #自定义一个服务，开机自启动，ExecStart字段设置为启动该脚本
@@ -92,7 +96,9 @@ ExecStopPost=/bin/echo post2
 #把这个自定义服务的ExecStop字段设置为启动脚本x
 
 #还有一种简单的方法是将该自定义service的[Service]区的Restart字段设置为always 
+Restart=always #失败,一stop真stop了..
 ```
+![](https://github.com/CUCCS/linux-2019-czHappy/blob/exp03/exp03/image/fail.PNG?raw=true)
 
 
 ## 实验问题
@@ -105,10 +111,10 @@ ExecStopPost=/bin/echo post2
   sudo apt-get install virtualbox-guest-utils
   
 #挂载测试 ，不再报错，可以看到share.txt文件
- mount -t vboxsf vbshare /mnt/share
+ mount -t vboxsf vbshare /mnt/share
  
- #实现上一步后，/etc/rc.local 中追加如下命令实现开机自启动
- mount -t vboxsf vbshare /mnt/share
+ #实现上一步后，/etc/rc.local 中追加如下命令实现开机自启动
+ mount -t vboxsf vbshare /mnt/share
  
  #reboot后查看共享文件夹，发现不能自动挂载
  ```
@@ -118,21 +124,21 @@ ExecStopPost=/bin/echo post2
  - 自己尝试编写一个service来控制挂载命令自动执行
  ```bash
 #首先建立一个service 
-sudo vi /etc/systemd/system/rc-local.service
+sudo vi /etc/systemd/system/rc-local.service
 #在该service写入如下内容
 
 [Unit]
-Description=/etc/rc.local Compatibility
+Description=/etc/rc.local Compatibility
 ConditionPathExists=/etc/rc.local 
- 
+ 
 [Service]
 Type=forking
-ExecStart=/etc/rc.local start   #为了启动这个脚本
+ExecStart=/etc/rc.local start   #为了启动这个脚本
 TimeoutSec=0
 StandardOutput=tty
 RemainAfterExit=yes
 SysVStartPriority=99
- 
+ 
 [Install]
 WantedBy=multi-user.target
 
@@ -142,7 +148,7 @@ sudo systemctl enable rc-local.service#f返回结果是建立了链接
 #在之前的rc.local里面编写挂载共享文件的命令
 !/bin/sh -e
 mount -t vboxsf vbshare /mnt/share
-exit 0
+exit 0
 
 #赋予rc.local 执行权限
 sudo chmod +x /etc/rc.local
