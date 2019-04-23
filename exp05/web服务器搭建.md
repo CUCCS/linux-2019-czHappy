@@ -31,7 +31,8 @@
         ```
       *  结果
 
-        ![verynginxlogin](./images/verynginxlogin.png)
+        ![verynginxlogin](./images/verynginxlogin.PNG)
+        
     * [安装nginx](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-ubuntu-18-04)
     
     * 结果
