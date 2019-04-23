@@ -37,7 +37,7 @@
     
     * 结果
 
-        ![nginx](./images/nginx8010.png)
+        ![nginx](./images/nginx8010.PNG)
 
     * 关于配置文件
       * nginx的配置文件在/etc/nginx 其中需要更改/etc/nginx/sites-available相应站点的server模块，添加fpm的语句， 并需要和/etc/nginx/sites-enabled生成符号链接
@@ -57,7 +57,7 @@
   * [wordpress安装](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-on-ubuntu-18-04)
   * 结果
 
-    ![wordpress](./images/wp_site.png)
+    ![wordpress](./images/wp_site.PNG)
 
 
   * [生成自签发证书](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04)
@@ -112,7 +112,7 @@
     ```
   * 结果
 
-    ![](./images/https.png)
+    ![](./images/https.PNG)
     ```bash
     #修改302为301
      return 301 https://$server_name$request_uri;
@@ -120,9 +120,9 @@
     ```
 * VeryNginx作为本次实验的Web App的反向代理服务器和WAF
 
-    ![](./images/nginx_conf.png)
+    ![](./images/nginx_conf.PNG)
 
-    ![](./images/RM.png)
+    ![](./images/RM.PNG)
 
 
   
@@ -147,7 +147,7 @@
     ```
   * 结果
 
-    ![dvwa](./images/dvwa2.png)
+    ![dvwa](./images/dvwa2.PNG)
 
 ---
 
@@ -155,60 +155,60 @@
 
 * 使用IP地址方式均无法访问上述任意站点，并向访客展示自定义的**友好错误提示信息页面-1**
   * RM
-    ![RM](./images/ip_dis1.png)
+    ![RM](./images/ip_dis1.PNG)
 
   * RE
-    ![RE](./images/ip_dis2.png)
+    ![RE](./images/ip_dis2.PNG)
 
   * Filter
-    ![F](./images/ip_dis.png)
+    ![F](./images/ip_dis.PNG)
 
   * 结果
 
 
-    ![](./images/ip不能访问.png)
+    ![](./images/ip不能访问.PNG)
 
 
 
 * [Damn Vulnerable Web Application (DVWA)](http://www.dvwa.co.uk/)只允许白名单上的访客来源IP，其他来源的IP访问均向访客展示自定义的**友好错误提示信息页面-2**
   * RM
   
-    ![RM](./images/dvwa_allow1.png)
+    ![RM](./images/dvwa_allow1.PNG)
 
   * RE
 
 
-    ![RE](./images/dvwa_allow2.png)
+    ![RE](./images/dvwa_allow2.PNG)
 
 
   * Filter  
-    ![F](./images/dvwa_allow3.png)
+    ![F](./images/dvwa_allow3.PNG)
 
   * 结果
 
 
-    ![F](./images/dvwa_forbid.png)
+    ![F](./images/dvwa_forbid.PNG)
 
 
 * 在不升级Wordpress版本的情况下，通过定制[VeryNginx](https://github.com/alexazhou/VeryNginx)的访问控制策略规则，**热**修复[WordPress \< 4.7.1 - Username Enumeration](https://www.exploit-db.com/exploits/41497/)
   * 添加规则
 
-  ![](./images/hot_fix_rule.png)
+  ![](./images/hot_fix_rule.PNG)
 
   * 效果
 
 
-  ![](./images/hot_fix_response.png)
+  ![](./images/hot_fix_response.PNG)
 
 
 * 通过配置[VeryNginx](https://github.com/alexazhou/VeryNginx)的Filter规则实现对[Damn Vulnerable Web Application (DVWA)](http://www.dvwa.co.uk/)的SQL注入实验在低安全等级条件下进行防护
 
 
   * Filter
-    ![F](./images/sql_inject.png)
+    ![F](./images/sql_inject.PNG)
   * 前后结果
-  ![](./images/sql_inject_example.png)
-  ![](./images/sql_inject_response.png)
+  ![](./images/sql_inject_example.PNG)
+  ![](./images/sql_inject_response.PNG)
 
 
 ## VeryNginx配置要求
@@ -216,7 +216,7 @@
 * [VeryNginx](https://github.com/alexazhou/VeryNginx)的Web管理页面仅允许白名单上的访客来源IP，其他来源的IP访问均向访客展示自定义的**友好错误提示信息页面-3**
   * Filter 过滤器 设置同之前只允许白名单IP
 
-  ![](./images/vn_white.png)
+  ![](./images/vn_white.PNG)
 
 * 通过定制[VeryNginx](https://github.com/alexazhou/VeryNginx)的访问控制策略规则实现：
     * 限制DVWA站点的单IP访问速率为每秒请求数 < 50
@@ -225,12 +225,12 @@
 
       * Frequency Limit  
 
-      ![](./images/speed.png)
+      ![](./images/speed.PNG)
 
       * 测试(安装appache，使用bin目录下的ab工具，在windows宿主机中测)
 
-      ![](./images/dvwa_speed.png)
-      ![](./images/wp_speed.png)
+      ![](./images/dvwa_speed.PNG)
+      ![](./images/wp_speed.PNG)
 
 
 
@@ -238,11 +238,11 @@
     * 禁止curl访问
       * 规则
 
-      ![](./images/curl_forbid.png)
+      ![](./images/curl_forbid.PNG)
 
       * 效果
 
-      ![](./images/curl_forbiden_response.png)
+      ![](./images/curl_forbiden_response.PNG)
 
 ## 实验遇到的问题
 - [ ] 证书签发后用https访问wp.sec.cuc.edu.cn，还是会提出警告证书无效
@@ -253,7 +253,8 @@
 - [x] 安装verynginx时要使用老版本(1.0.2)的openssl和libssl，否则报错
 - [x] 访问wp_sec.cuc.edu.cn时跳转到带端口号的URL，暴露了端口号
   - 在数据库wp_options中或者wordpress仪表盘中设置选项中修改,删除两项后面的 :4433
-  ![](./images/wp_database.png) 
+  
+  ![](./images/wp_database.PNG) 
 
 
 ## 参考资料
