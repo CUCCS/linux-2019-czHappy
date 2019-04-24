@@ -245,7 +245,13 @@
       ![](./images/curl_forbiden_response.PNG)
 
 ## 实验遇到的问题
-- [ ] 证书签发后用https访问wp.sec.cuc.edu.cn，还是会提出警告证书无效
+- [x] 证书签发后用https访问wp.sec.cuc.edu.cn，还是会提出警告证书无效
+  - 需要在本地安装此网站证书，方法是安装证书并且安装在本地计算机的“受信用的根证书颁发机构”
+  - 注意，证书颁发的域名必须和wordpress配置的域名一致，否则无法匹配，所以在生成自签名密钥时应设置好
+  - 重启浏览器
+  
+  ![](./images/https_success.PNG)
+  
 - [x] 禁止本机IP访问上述自己在verynginx配置页配置的主机后，无法再管理verynginx
   - 删除verynginx中的config.json文件，重启verynginx
   - 为了不必要的重新设置，备份基础配置的config.json
